@@ -14,16 +14,17 @@ class Graph:
         self.V = vertices
         self.graph = defaultdict([])
 
-    def addEdge(self, u, v):
+    def add_edge(self, u, v):
         self.graph[u].append(v)
 
-    def printyesorno(self, each):
-            if each == 3 or each == 4 or each == 1:
+    def print_yes_or_no(self, node):
+            if node == 3 or node == 4 or node == 1:
                 return 1
             else:
                 return 0
 
-    def convertToNumber(self,node):
+    def convert_to_number(self,node):
+        path = 0
         if node == "NEW":
             path = 0
         if node == "ENGAGED":
@@ -36,13 +37,13 @@ class Graph:
             path = 4
         return path
 
-    def printAllPathsUtil(self, u, d, visited, path):
+    def print_all_paths_util(self, u, d, visited, path):
         visited[u] = True
         path.append(u)
-        # path.append("->")
+
         if u == d:
             for each in path:
-                flag = self.printyesorno(each)
+                flag = self.print_yes_or_no(each)
             if flag == 0:
                 for n, i in enumerate(path):
                     if i == 0:
@@ -75,14 +76,14 @@ class Graph:
         else:
             for i in self.graph[u]:
                 if visited[i] == False:
-                    self.printAllPathsUtil(i, d, visited, path)
+                    self.print_all_paths_util(i, d, visited, path)
         path.pop()
         visited[u] = False
 
-    def printAllPaths(self, s, d):
+    def print_all_paths(self, s, d):
         visited = [False] * (self.V)
         path = []
-        self.printAllPathsUtil(s, d, visited, path)
+        self.print_all_paths_util(s, d, visited, path)
 
 
 totalNodes = 5
@@ -95,7 +96,7 @@ for i in range(0,number):
     fromState = str(input())
     print("to_state :")
     toState = str(input())
-    g.addEdge(g.convertToNumber(fromState), g.convertToNumber(toState))
+    g.add_edge(g.convert_to_number(fromState), g.convert_to_number(toState))
 
 states = []
 print("Initial State : ")
@@ -105,9 +106,9 @@ finals = int(input())
 for each in range(0,finals):
     finalState = str(input())
     states.append(finalState)
-states = [1,2,3,4]
+states = [1, 2, 3, 4]
 for each in states:
-    s = g.convertToNumber(start)
+    s = g.convert_to_number(start)
     d = each
-    g.printAllPaths(s, d)
+    g.print_all_paths(s, d)
 

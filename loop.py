@@ -6,10 +6,10 @@ class Graph():
         self.graph = defaultdict(list)
         self.V = vertices
 
-    def addEdge(self, u, v):
+    def add_edge(self, u, v):
         self.graph[u].append(v)
 
-    def isCyclicUtil(self, v, visited, recStack):
+    def is_cyclic_util(self, v, visited, recStack):
 
         # Mark current node as visited and
         # adds to recursion stack
@@ -23,7 +23,7 @@ class Graph():
 
             # print(neighbour,end= " ")
             if visited[neighbour] == False:
-                if self.isCyclicUtil(neighbour, visited, recStack) == True:
+                if self.is_cyclic_util(neighbour, visited, recStack) == True:
                     return True
             elif recStack[neighbour] == True:
                 return True
@@ -34,23 +34,23 @@ class Graph():
         return False
 
     # Returns true if graph is cyclic else false
-    def isCyclic(self):
+    def is_cyclic(self):
         visited = [False] * self.V
         recStack = [False] * self.V
         for node in range(self.V):
             if visited[node] == False:
-                if self.isCyclicUtil(node, visited, recStack) == True:
+                if self.is_cyclic_util(node, visited, recStack) == True:
                     return True
         return False
 
 
-    def printyesorno(self, each):
+    def print_yes_or_no(self, each):
             if each == 3 or each == 4:
                 return 1
             else:
                 return 0
 
-    def convertnumber(self,path):
+    def convert_number(self,path):
         for n, i in enumerate(path):
             if i == 0:
                 path[n] = "NEW"
@@ -64,7 +64,7 @@ class Graph():
                 path[n] = "COMPLETED"
             return path
 
-    def printAllPathsUtil(self, u, d, visited, path):
+    def print_all_paths_util(self, u, d, visited, path):
         visited[u] = True
         path.append(u)
         # path.append("->")
@@ -111,14 +111,14 @@ class Graph():
         else:
             for i in self.graph[u]:
                 if visited[i] == False:
-                    self.printAllPathsUtil(i, d, visited, path)
+                    self.print_all_paths_util(i, d, visited, path)
         path.pop()
         visited[u] = False
 
-    def printAllPaths(self, s, d):
+    def print_all_paths(self, s, d):
         visited = [False] * (self.V)
         path = []
-        self.printAllPathsUtil(s, d, visited, path)
+        self.print_all_paths_util(s, d, visited, path)
 
     # def printpaths(self, rec):
     #     x=0
@@ -129,23 +129,23 @@ class Graph():
 
 
 g = Graph(5)
-g.addEdge(0, 1)
-g.addEdge(0, 2)
-g.addEdge(0, 3)
-g.addEdge(0, 4)
-g.addEdge(1, 2)
-g.addEdge(2, 1)
-g.addEdge(1, 3)
-g.addEdge(1, 4)
+g.add_edge(0, 1)
+g.add_edge(0, 2)
+g.add_edge(0, 3)
+g.add_edge(0, 4)
+g.add_edge(1, 2)
+g.add_edge(2, 1)
+g.add_edge(1, 3)
+g.add_edge(1, 4)
 
-states = [1,2,3,4]
+states = [1, 2, 3, 4]
 # for each in states:
 #     s = 0
 #     d = each
-g.printAllPaths(0, 4)
+g.print_all_paths(0, 4)
 
 print("\n")
-if g.isCyclic() == 1:
+if g.is_cyclic() == 1:
     print("Graph has a cycle")
 else:
     print("Graph has no cycle")
