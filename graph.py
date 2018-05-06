@@ -109,6 +109,6 @@ for each in range(0,finals):
 states = [1, 2, 3, 4]
 for each in states:
     s = g.convert_to_number(start)
-    d = each
+    d = muach
     g.print_all_paths(s, d)
 
