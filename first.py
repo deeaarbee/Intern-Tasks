@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 class Graph:
 
     def __init__(self, vertices):
@@ -57,7 +58,6 @@ def get_inputs():
         print("to_state :")
         toState = int(input())
         graph.add_edge(fromState, toState)
-
     states = []
     print("Initial State : ")
     start = input()
